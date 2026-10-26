@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel><title>Test Feed</title>
+<item><title>Utility launches V2G program with 500 EVs</title>
+<link>https://example.com/news/v2g-program?utm_source=rss&amp;id=1</link>
+<pubDate>Sat, 24 Oct 2026 08:00:00 GMT</pubDate>
+<description>&lt;p&gt;A utility started a &lt;b&gt;vehicle-to-grid&lt;/b&gt; program for demand response.&lt;/p&gt;</description></item>
+<item><title>New smartphone camera review</title>
+<link>https://example.com/news/phone</link>
+<pubDate>Sat, 24 Oct 2026 09:00:00 GMT</pubDate>
+<description>Nice photos.</description></item>
+<item><title>EV charging NFT marketplace opens</title>
+<link>https://example.com/news/nft</link>
+<pubDate>Sat, 24 Oct 2026 09:30:00 GMT</pubDate>
+<description>EV charging tokens.</description></item>
+<item><title>Old EV charging story</title>
+<link>https://example.com/news/old</link>
+<pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate>
+<description>EV charging long ago.</description></item>
+</channel></rss>

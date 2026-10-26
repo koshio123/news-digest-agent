@@ -1,0 +1,107 @@
+# ロールと興味の設定。採点・クエリ生成・事前フィルタのすべてがこのファイルを基準にする。
+# 変えたら `uv run digest run --dry-run --no-slack` で結果を確かめる。
+
+role: EVを使ったエネルギーマネジメントシステムのソフトウェア／システムエンジニア
+context: |
+  家庭向けV1Gスマート充電、V2G/VPPアプリケーション、それを支えるクラウドバックエンド
+  （AWS・FastAPI・PostgreSQL）を開発している。EVの充電行動予測や車両シミュレーションも扱う。
+  LLMエージェント（LangGraph等）を業務に取り入れる方法にも関心がある。
+
+interests:
+  - V2G
+  - V1G
+  - VPP
+  - smart charging
+  - EV charging
+  - demand response
+  - energy management
+  - DER
+  - charging behavior prediction
+  - LLM
+  - AI agent
+  - Agentic AI
+  - LangGraph
+  - AWS
+  - PostgreSQL
+
+# 事前フィルタ用の追加キーワード（タイトル・本文に含まれると加点）。日本語も可
+keywords:
+  - vehicle-to-grid
+  - virtual power plant
+  - OCPP
+  - ISO 15118
+  - aggregator
+  - grid flexibility
+  - time-of-use
+  - EV
+  - 充電
+  - 電力
+  - 需給調整
+  - アグリゲーター
+  - 系統
+  - エージェント
+  - LLM
+  - FastAPI
+  - Bedrock
+
+# 含まれる記事は除外する
+exclude:
+  - cryptocurrency
+  - NFT
+  - 株価予想
+
+output_language: 日本語
+first_run_lookback_days: 3
+
+# 「重要」の定義（合計は自動で1に正規化される）
+weights:
+  relevance: 0.4       # 関連度
+  applicability: 0.35  # 実務への応用性
+  impact: 0.25         # インパクト
+
+selection:
+  max_candidates: 80        # LLM採点に回す最大件数
+  top_k: 10                 # 掲載する最大件数
+  min_score: 55             # 掲載の下限（0〜100）
+  max_per_source_type: 5    # 論文/ニュース/ブログ/SNSそれぞれの上限
+  honorable_mentions: 10    # 要約なしで載せる次点
+
+sources:
+  arxiv:
+    enabled: true
+    # 空なら全分野。絞りすぎると電力系（eess）を取りこぼすので広めにする
+    categories: [cs.AI, cs.LG, cs.CL, cs.RO, cs.MA, eess.SY, eess.SP, math.OC]
+    fixed_queries:
+      - vehicle-to-grid
+      - EV charging scheduling
+      - virtual power plant
+    max_results_per_query: 30
+    overlap_days: 3   # arXiv は投稿から公開まで1〜2日遅れるため広めに取り、既読DBで除く
+
+  rss:
+    enabled: true
+    overlap_days: 1
+    feeds:
+      # SNS・コミュニティ
+      - {name: Hacker News, url: "https://hnrss.org/frontpage?points=150", type: sns}
+      - {name: r/LocalLLaMA, url: "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=day", type: sns}
+      # ニュース（エネルギー・EV）
+      - {name: Electrek, url: "https://electrek.co/feed/", type: news}
+      - {name: Utility Dive, url: "https://www.utilitydive.com/feeds/news/", type: news}
+      - {name: Canary Media, url: "https://www.canarymedia.com/rss.rss", type: news}
+      - {name: スマートジャパン, url: "https://rss.itmedia.co.jp/rss/2.0/smartjapan.xml", type: news}
+      # ニュース（クラウド・開発）
+      - {name: Publickey, url: "https://www.publickey1.jp/atom.xml", type: news}
+      - {name: AWS What's New, url: "https://aws.amazon.com/about-aws/whats-new/recent/feed/", type: news, max_items: 60}
+      # ブログ（AI・エージェント）
+      - {name: LangChain Blog, url: "https://blog.langchain.com/rss/", type: blog}
+      - {name: Simon Willison, url: "https://simonwillison.net/atom/everything/", type: blog}
+      - {name: Hugging Face Blog, url: "https://huggingface.co/blog/feed.xml", type: blog}
+      - {name: Zenn LLM, url: "https://zenn.dev/topics/llm/feed", type: blog}
+
+  web:
+    enabled: true     # TAVILY_API_KEY が無ければ自動でスキップ
+    topic: news
+    fixed_queries: []
+    max_results_per_query: 8
+    overlap_days: 1

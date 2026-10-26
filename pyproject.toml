@@ -1,0 +1,77 @@
+[project]
+name = "news-digest-agent"
+version = "0.1.0"
+description = "エンジニアのロールと興味に合わせて論文・ニュース・ブログ・SNSを収集し、重要なものを要約して届けるLangGraphアプリ"
+readme = "README.md"
+authors = [{ name = "Kentaro Koshio" }]
+requires-python = ">=3.13"
+dependencies = [
+    "feedparser>=6.0.14",
+    "httpx>=0.28.1",
+    "langchain>=1",
+    "langchain-anthropic>=1",
+    "langchain-core>=1",
+    "langchain-ollama>=1",
+    "langgraph>=1",
+    "pydantic>=2.14.1",
+    "pydantic-settings>=2.16.1",
+    "python-dotenv>=1.2.4",
+    "pyyaml>=6.0.3",
+    "slack-sdk>=3.45.0",
+    "typer>=0.27.3",
+]
+
+[project.scripts]
+digest = "news_digest.cli:app"
+
+[build-system]
+requires = ["uv_build>=0.11.0,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "news_digest"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # isort
+    "B",        # bugbear
+    "UP",       # pyupgrade
+    "SIM",      # simplify
+    "RUF",      # ruff固有
+    "S",        # bandit（秘密情報・危険な呼び出し）
+    "T20",      # print禁止（ログはloggingを使う）
+    "PTH",      # os.pathよりpathlib
+]
+ignore = [
+    "RUF001", "RUF002", "RUF003",  # 日本語の全角文字を含む文字列・コメントを許可
+    "B008",                        # typerの引数既定値に関数呼び出しを使う
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
+"src/news_digest/prompts.py" = ["E501"]  # プロンプト本文は折り返さない
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.13"
+typeCheckingMode = "standard"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = ["network: 実際に外部APIへアクセスするテスト（既定では実行しない）"]
+
+[dependency-groups]
+dev = [
+    "langgraph-cli[inmem]>=0.4.38",
+    "pyright>=1.1.414",
+    "pytest>=9.1.1",
+    "ruff>=0.17.2",
+    "types-pyyaml>=6.0.12.20260906",
+]

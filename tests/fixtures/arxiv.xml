@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>arXiv Query</title>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01234v2</id>
+    <published>2026-10-24T10:00:00Z</published>
+    <updated>2026-10-24T10:00:00Z</updated>
+    <title>Learning-Based V2G Scheduling for Residential
+      Virtual Power Plants</title>
+    <summary>We propose a reinforcement learning method for V2G scheduling in a virtual power plant, reducing peak load by 18%.</summary>
+    <author><name>Alice Example</name></author>
+    <author><name>Bob Example</name></author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.09999v1</id>
+    <published>2026-10-10T10:00:00Z</published>
+    <updated>2026-10-10T10:00:00Z</updated>
+    <title>An Old Paper Outside the Window</title>
+    <summary>Old.</summary>
+    <author><name>Carol</name></author>
+  </entry>
+</feed>

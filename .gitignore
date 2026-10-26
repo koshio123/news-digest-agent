@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# 環境変数・秘密情報
+.env
+.env.*
+!.env.example
+
+# 実行データ（履歴DB・ダイジェスト・ログ）
+data/
+output/
+logs/
+.langgraph_api/
+
+# エディタ・OS
+.DS_Store
+.idea/
+.vscode/
